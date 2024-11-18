@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예약확인 및 취소</title>
+    <title>예약하기</title>
     <style>
         * {
             margin: 0;
@@ -20,8 +20,8 @@
         #container {
             display: flex;
             width: 95%; /* 화면을 더 많이 차지하도록 너비를 확대 */
+            height: 550px;
             max-width: 1600px; /* 최대 너비를 더 넓게 */
-            height: 900px;
             background-color: #ffffff;
             border-radius: 15px;
             overflow: hidden;
@@ -35,10 +35,10 @@
             background-color: #f9f9f9;
         }
         #menu h2 {
-            font-size: 26px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
+                font-size: 26px;
+                font-weight: bold;
+                margin-bottom: 20px;
+            }
         #menu a {
             font-size: 22px;
             margin: 20px 0;
@@ -51,33 +51,57 @@
             color: #007bff;
             font-weight: bold;
         }
-        #login {
-            width: 50%;
+        /* 가운데 달력 */
+        #place {
+            width: 35%; 
             padding: 40px;
             text-align: center;
             position: relative;
-            margin: 0 40px; /* 좌우 간격 확보 */
+            margin: 0 40px;
         }
-        #info {
-            width: 25%; /* 예약 정보 섹션을 더 넓게 */
+        #place h2 {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        #booking-info {
+            width: 25%; 
             padding: 40px;
             background-color: #f9f9f9;
         }
-        #info h3 {
+        #booking-info h3 {
             font-size: 26px;
             color: #007bff;
             margin-bottom: 20px;
         }
+       
+        
     </style>
 </head>
+
 <body>
     <div id="container">
         <!-- 메뉴 섹션 -->
         <div id="menu">
             <h2>Menu</h2>
-            <a href=="{{ url_for('check_cancel') }}" class="active">예약확인 및 취소</a>
-            <a href="{{ url_for('placereservation') }}">예약하기</a>
+            <a href="placereservation" class="active">예약하기</a>
+            <a href="{{ url_for('check_cancel') }}">예약확인 및 취소</a>
             <a href="{{ url_for('support') }}">고객센터</a>
         </div>
+
+        <div id="place">
+            <h2>지역선택화면</h2>
+            
+        </div>
+
+        <div id="booking-info">
+            <h3>지역선택확인</h3>
+            <a href="{{ url_for('reservation') }}" class="active">시간예약</a>
+        </div>
+    </div>
+
+       
+        
 </body>
 </html>
