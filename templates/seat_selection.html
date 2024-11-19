@@ -1,9 +1,211 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>버스예약시스템6조</title>
-    </head>
-    좌석 선택
-    </html>
+    <title>좌석선택 페이지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F9F9F9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* 전체 레이아웃 */
+        #container {
+            display: flex;
+            width: 80%;
+            max-width: 1600px;
+            height: 900px;
+            background-color:#d3d3d3;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        /* 왼쪽 메뉴 섹션 */
+        #menu {
+            width: 15%;
+            background-color: #3366FF;
+            padding: 20px;
+            color: white;
+            box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
+        }
+        #menu h2 {
+            margin-top: 20px;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #B3E5FC;
+        }
+        #menu a {
+            display: block;
+            font-size: 24px;
+            margin: 90px 0px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        #menu a.active {
+            position: relative;
+            font-weight: bold;
+            color: #3366FF;
+            background-color: white;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬을 맞추기 위해 조정 */
+            text-align: center;
+        }
+        #menu a.disabled {
+            color: #d1d1d1;
+            pointer-events: none;
+        }
+       
+        #status-bar {
+            width: 15%;
+            padding: 20px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #4A90E2;
+            font-size: 24px; /* 글자 크기를 크게 설정 */
+            box-shadow: 3px 0 7px rgba(0, 0, 0, 0.2);
+           margin-left: 10px; 
+        }
+        #status-bar .status-step {
+            margin: 62px 0; /* 글자 간의 간격 조정 */
+            font-size: 24px;
+            font-weight: bold;
+            color: #4A90E2;
+            text-align: center;
+        }
+        #status-bar .status-step.active {
+            position: relative;
+            font-size: 30px;
+             background-color: #d3d3d3;
+            font-weight: bold;
+            color: #3366FF;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬을 맞추기 위해 조정 */
+            text-align: center;
+            opacity: 0.7; /* 투명도를 80%로 설정 */
+        }
+
+        
+        #status-bar .status-step.disabled {
+            color: #b0b0b0;
+           
+        }   
+        #status-bar .status-icon {
+            width: 50px;  /* 원하는 크기로 설정 */
+            height: 120px;
+             margin: 5px 0; /* 상하 간격 설정 */
+            display: block; /* 세로 정렬을 위한 설정 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 오른쪽 컨텐츠 섹션 */
+        #content {
+            width: 50%;
+            padding: 20px;
+        }
+        #content h1 {
+            font-size: 22px;
+            color: #3366FF;
+            margin-bottom: 20px;
+        }
+        /* 오른쪽 컨텐츠 섹션 */
+        #content {
+            width: 50%;
+            padding: 20px;
+            color: #ffffff;
+        }
+        #content h1 {
+            font-size: 22px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        /* 공통 박스 스타일 */
+        .box {
+            width: 1000px;
+            height: 800px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4A90E2;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        /* 홈 화면 버튼 스타일 */
+        #home-button {
+            margin-top: auto;
+            
+            text-align: center;
+        }
+    
+        #home-button img {
+            width: 80px;
+            height 80px;
+            margin-bottom: 5px;
+        }
+        #home-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- 왼쪽 메뉴 섹션 -->
+        <div id="menu">
+            <h2>Menu</h2>
+            <a href="{{ url_for('placereservation') }}" class="active" >예약하기</a>
+            <a href="{{ url_for('check_cancel') }}">예약 확인/취소</a>
+            <a href="{{ url_for('operation_info') }}">운행정보</a>
+            <a href="{{ url_for('support') }}" >고객센터</a>
+         <!-- 홈 버튼 섹션 -->
+         <div id="home-button">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
+                <div>홈화면으로 돌아가기</div>
+            </a>
+        </div>
+    </div>
+
+        <!-- 세로 상태 표시줄 -->
+        <div id="status-bar">
+            <div class="status-step active">일정선택</div>
+            <div class="status-step disabled">지역선택</div>
+            <div class="status-step disabled">좌석선택</div>
+            <div class="status-step disabled">결제하기</div>
+        </div>
+        
+
+        <!-- 오른쪽 컨텐츠 섹션 -->
+        <div id="content">
+            <h1>일정을 선택해주세요</h1>
+            <div class="box">
+                여기에 달력 또는 예약 정보를 표시합니다.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

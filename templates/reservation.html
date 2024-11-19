@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예약하기</title>
+    <title>지역선택 페이지</title>
     <style>
         * {
             margin: 0;
@@ -12,297 +12,202 @@
         }
         body {
             font-family: Arial, sans-serif;
-            background-color: #f1f1f1;
+            background-color: #F9F9F9;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            align-items: center;
+            min-height: 100vh;
         }
+        /* 전체 레이아웃 */
         #container {
             display: flex;
-            width: 95%; /* 화면을 더 많이 차지하도록 너비를 확대 */
-            max-width: 1600px; /* 최대 너비를 더 넓게 */
-            background-color: #ffffff;
-            border-radius: 15px;
+            width: 80%;
+            max-width: 1600px;
+            height: 900px;
+            background-color:#d3d3d3;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
         }
-        /* 왼쪽 메뉴 */
+        /* 왼쪽 메뉴 섹션 */
         #menu {
-            width: 20%;
-            padding: 40px;
-            background-color: #f9f9f9;
+            width: 15%;
+            background-color: #3366FF;
+            padding: 20px;
+            color: white;
+            box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
         }
         #menu h2 {
-            font-size: 26px;
+            margin-top: 20px;
+            font-size: 40px;
             font-weight: bold;
             margin-bottom: 20px;
+            color: #B3E5FC;
         }
         #menu a {
-            font-size: 22px;
-            margin: 20px 0;
-            text-decoration: none;
-            color: black;
             display: block;
+            font-size: 24px;
+            margin: 90px 0px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-align: center;
         }
         #menu a.active {
-            font-size: 26px;
-            color: #007bff;
-            font-weight: bold;
-        }
-        /* 가운데 달력 */
-        #calendar {
-            width: 35%; /* 달력 섹션 너비를 더 넓게 */
-            padding: 40px;
-            text-align: center;
             position: relative;
-            margin: 0 40px; /* 좌우 간격 확보 */
-        }
-        #calendar h3 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        #calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
-            text-align: center;
-            padding: 0 10px;
-        }
-        #calendar-weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            margin-bottom: 15px; /* 요일과 날짜 간의 간격 */
             font-weight: bold;
-            font-size: 20px; /* 요일 글자 크기 조정 */
-            color: #333;
-            text-align: center; /* 중앙 정렬 */
-            letter-spacing: 2px; /* 글자 간격을 약간 넓힘 */
-            margin-left: 25px; /* 요일 전체를 오른쪽으로 이동 */
+            color: #3366FF;
+            background-color: white;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬을 맞추기 위해 조정 */
+            text-align: center;
         }
-        
-        .day {
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 18px;
+        #menu a.disabled {
+            color: #d1d1d1;
+            pointer-events: none;
         }
-        .day.selected {
-            background-color: #007bff;
-            color: white;
-        }
-        /* 화살표 버튼 */
-        .arrow {
-            font-size: 36px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #333;
-        }
-        .arrow.left {
-            left: -20px;
-        }
-        .arrow.right {
-            right: -20px;
-        }
-        /* 시간 선택 섹션 */
-        #time-selector {
-            width: 10%; /* 시간 선택 섹션의 너비를 조정 */
-            background-color: #e0e0e0;
+       
+        #status-bar {
+            width: 15%;
             padding: 20px;
-            border-radius: 10px;
-            max-height: 400px;
-            overflow-y: scroll;
-            margin: 0 20px; /* 양쪽에 여유 공간 추가 */
-        }
-        .time-slot {
-            padding: 15px;
-            margin: 10px 0;
             background-color: #ffffff;
-            text-align: center;
-            border-radius: 8px;
-            font-size: 18px;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #4A90E2;
+            font-size: 24px; /* 글자 크기를 크게 설정 */
+            box-shadow: 3px 0 7px rgba(0, 0, 0, 0.2);
+           margin-left: 10px; 
+        }
+        #status-bar .status-step {
+            margin: 41px 0; /* 글자 간의 간격 조정 */
+            font-size: 24px;
             font-weight: bold;
-            color: #000;
+            color: #4A90E2;
+            text-align: center;
         }
-        .time-slot.selected {
-            background-color: #007bff;
-            color: #fff;
+        #status-bar .status-step.active {
+            position: relative;
+            font-size: 30px;
+             background-color: #d3d3d3;
+            font-weight: bold;
+            color: #3366FF;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬을 맞추기 위해 조정 */
+            text-align: center;
+            opacity: 0.7; /* 투명도를 80%로 설정 */
         }
-        /* 오른쪽 예약 정보 */
-        #booking-info {
-            width: 25%; /* 예약 정보 섹션을 더 넓게 */
-            padding: 40px;
-            background-color: #f9f9f9;
+
+        
+        #status-bar .status-step.disabled {
+            color: #b0b0b0;
+           
+        }   
+        #status-bar .status-icon {
+            width: 50px;  /* 원하는 크기로 설정 */
+            height: 120px;
+             margin: 5px 0; /* 상하 간격 설정 */
+            display: block; /* 세로 정렬을 위한 설정 */
+            margin-left: auto;
+            margin-right: auto;
         }
-        #booking-info h3 {
-            font-size: 26px;
+
+        /* 오른쪽 컨텐츠 섹션 */
+        #content {
+            width: 50%;
+            padding: 20px;
+        }
+        #content h1 {
+            font-size: 22px;
+            color: #3366FF;
+            margin-bottom: 20px;
+        }
+        /* 오른쪽 컨텐츠 섹션 */
+        #content {
+            width: 50%;
+            padding: 20px;
+            color: #ffffff;
+        }
+        #content h1 {
+            font-size: 22px;
             color: #007bff;
             margin-bottom: 20px;
         }
-        .details {
-            margin-top: 25px;
+        /* 공통 박스 스타일 */
+        .box {
+            width: 1000px;
+            height: 800px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4A90E2;
+            font-size: 24px;
+            font-weight: bold;
         }
-        .details p {
+        /* 홈 화면 버튼 스타일 */
+        #home-button {
+            margin-top: auto;
+            
+            text-align: center;
+        }
+    
+        #home-button img {
+            width: 80px;
+            height 80px;
+            margin-bottom: 5px;
+        }
+        #home-button a {
+            color: white;
+            text-decoration: none;
             font-size: 20px;
-            margin: 12px 0;
-        }
-        .details .highlight {
-            color: #007bff;
             font-weight: bold;
-        }
-        #seat-selection-button {
-            width: 100%;
-            padding: 15px;
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
-            background-color: #007bff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        #seat-selection-button:hover {
-            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div id="container">
-        <!-- 메뉴 섹션 -->
+        <!-- 왼쪽 메뉴 섹션 -->
         <div id="menu">
             <h2>Menu</h2>
-            <a href="reservation.html" class="active">예약하기</a>
-            <a href="check_cancel.html">예약확인 및 취소</a>
-            <a href="support.html">고객센터</a>
-        </div>
-        
-        <!-- 캘린더 섹션 -->
-        <div id="calendar">
-            <div class="arrow left" onclick="prevMonth()">&lt;</div>
-            <h3 id="currentMonth"></h3>
-            <div id="calendar-weekdays"></div>
-            <div id="calendar-days"></div>
-            <div class="arrow right" onclick="nextMonth()">&gt;</div>
-        </div>
-        
-        <!-- 시간 선택 섹션 -->
-        <div id="time-selector">
-            <!-- 시간 선택 버튼들 -->
-        </div>
-        
-        <!-- 예약 정보 섹션 -->
-        <div id="booking-info">
-            <h3>예약 시간 확인</h3>
-            <div class="details">
-                <p class="highlight" id="selected-date">날짜를 선택하세요</p>
-                <p id="selected-time">시간을 선택하세요</p>
+            <a href="{{ url_for('placereservation') }}" class="active" >예약하기</a>
+            <a href="{{ url_for('check_cancel') }}">예약 확인/취소</a>
+            <a href="{{ url_for('operation_info') }}">운행정보</a>
+            <a href="{{ url_for('support') }}" >고객센터</a>
+
+               <!-- 홈 버튼 섹션 -->
+               <div id="home-button">
+                <a href="{{ url_for('index') }}">
+                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
+                    <div>홈화면으로 돌아가기</div>
+                </a>
             </div>
-            <!-- 좌석 선택 버튼 추가 -->
-            <button id="seat-selection-button" onclick="goToSeatSelection()">좌석 선택</button>
         </div>
 
-    <script>
-        const calendarDays = document.getElementById("calendar-days");
-        const calendarWeekdays = document.getElementById("calendar-weekdays");
-        const currentMonth = document.getElementById("currentMonth");
-        const selectedDate = document.getElementById("selected-date");
-        const selectedTime = document.getElementById("selected-time");
-        const timeSelector = document.getElementById("time-selector");
+        <!-- 세로 상태 표시줄 -->
+        <div id="status-bar">
+            <div class="status-step active">일정선택</div>
+            <img src="{{ url_for('static', filename='images/j.png') }}" alt="small icon" class="status-icon">
+            <div class="status-step disabled">지역선택</div>
+            <div class="status-step disabled">좌석선택</div>
+            <div class="status-step disabled">결제하기</div>
+        </div>
         
-        let date = new Date();
-        
-        // 월 이름과 요일을 한글로 설정
-        const monthNames = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
-        const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
-        const timeSlots = ["13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00"]; // 시간 리스트
 
-        function renderCalendar() {
-            const year = date.getFullYear();
-            const month = date.getMonth();
-            const firstDay = new Date(year, month, 1).getDay();
-            const lastDate = new Date(year, month + 1, 0).getDate();
-
-            calendarDays.innerHTML = ""; // 기존 날짜 지우기
-            currentMonth.textContent = `${year}년 ${monthNames[month]}`;
-
-            // 요일 추가
-            calendarWeekdays.innerHTML = "";
-            weekdays.forEach(day => {
-                const dayDiv = document.createElement("div");
-                dayDiv.textContent = day;
-                calendarWeekdays.appendChild(dayDiv);
-            });
-
-            // 빈 칸 추가
-            for (let i = 0; i < firstDay; i++) {
-                const emptyDiv = document.createElement("div");
-                calendarDays.appendChild(emptyDiv);
-            }
-
-            // 날짜 추가
-            for (let i = 1; i <= lastDate; i++) {
-                const dayDiv = document.createElement("div");
-                dayDiv.className = "day";
-                dayDiv.textContent = i;
-                dayDiv.onclick = () => selectDate(year, month, i);
-                calendarDays.appendChild(dayDiv);
-            }
-        }
-
-        function prevMonth() {
-            date.setMonth(date.getMonth() - 1);
-            renderCalendar();
-        }
-
-        function nextMonth() {
-            date.setMonth(date.getMonth() + 1);
-            renderCalendar();
-        }
-
-        function selectDate(year, month, day) {
-            const days = document.querySelectorAll(".day");
-            days.forEach(day => day.classList.remove("selected"));
-            
-            const selectedDay = new Date(year, month, day);
-            const weekday = selectedDay.toLocaleDateString("ko-KR", { weekday: "long" });
-
-            selectedDate.textContent = `${year}년 ${month + 1}월 ${day}일 (${weekday})`;
-            event.target.classList.add("selected"); // 선택한 날짜에 스타일 추가
-        }
-
-        // 시간 선택 기능 추가
-        function renderTimeSlots() {
-            timeSelector.innerHTML = "";
-            timeSlots.forEach(time => {
-                const timeDiv = document.createElement("div");
-                timeDiv.className = "time-slot";
-                timeDiv.textContent = time;
-                timeDiv.onclick = () => selectTime(time);
-                timeSelector.appendChild(timeDiv);
-            });
-        }
-
-        function selectTime(time) {
-            const times = document.querySelectorAll(".time-slot");
-            times.forEach(slot => slot.classList.remove("selected"));
-            event.target.classList.add("selected");
-            selectedTime.textContent = `선택한 시간: ${time}`;
-        }
-
-        renderCalendar();
-        renderTimeSlots();
-
-        function goToSeatSelection() {
-            window.location.href = "seat_selection.html"; // 좌석 선택 페이지 파일 경로
-        }
-        
-    </script>
+        <!-- 오른쪽 컨텐츠 섹션 -->
+        <div id="content">
+            <h1>일정을 선택해주세요</h1>
+            <div class="box">
+                여기에 달력 또는 예약 정보를 표시합니다.
+            </div>
+        </div>
+    </div>
 </body>
 </html>

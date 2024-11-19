@@ -1,76 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>버스예약시스템6조</title>
+    <title>메인 페이지</title>
     <style>
         * {
             margin: 0;
             padding: 0;
-        }
-        body {
-            background-color: #e3e3e3;
-        }
-        #wrap {
-            width: 1500px;
-            margin: 50px auto 0; /* 상단 여백 추가 */
-        }
-        #header {
-            width: 100%;
-            display: flex;
-        }
-         /* 메뉴 스타일 */
-         #header .menu1, #header .menu2, #header .menu3 {
-            width: 33%;
-            height: 50px;
-            text-align: center;
-            line-height: 50px;
-            font-size: 30px;
-            font-family: 'Poppins', Arial, sans-serif; /* 둥근 글꼴 */
-            font-weight: 700; /* 글씨 두께 설정 */
-        }
-        #point{
-          width: 100%;  
-        }
-        
-        #point .bar{
-            width: 100%;
-            height: 5px;
-            background-color: #63b1e8;
-        }
-        #slider {
-            width: 100%;
-            height: 500px;
-            display: flex;
-            justify-content: center; /* 수평 가운데 정렬 */
-            align-items: center; /* 수직 가운데 정렬 */
-            padding-top: 20px; /* 상단 여백 추가 */
             box-sizing: border-box;
         }
-        #slider img {
-            max-width: 100%;
-            max-height: 100%;
+        body {
+            font-family: Arial, sans-serif;
+            background-color:  #4A90E2; /* 기본 배경색 파란색 */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between;
+            align-items: center;
         }
-       
+        /* 상단 네비게이션 */
+        #navbar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            background-color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #navbar a {
+            font-size: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+        }
+        #navbar a.active {
+            color: #007bff; /* 활성화된 링크의 색상 */
+        }
+        /* 메인 컨텐츠 */
+        #main-content {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #FFFFFF; /* 흰색 배경 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        #main-content img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        /* 하단 섹션 스타일 */
+        #footer-container {
+            width: 100%;
+            height: 100px;
+            background-color: #ffffff; /* 페이지의 배경색과 같은 색 */
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        #footer {
+            display: flex;
+            justify-content: space-around;
+            width: 90%;
+            height: 180px;
+            max-width: 900px; /* 최대 너비 설정 */
+            background-color: #FFFFFF; /* 흰색 배경 */
+            padding: 20px 0;
+            border-radius: 30px; /* 둥근 사각형 모양 */
+            /*box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);*/
+            position: relative;
+            top: -80px; /* 위로 약간 올라가도록 */
+            z-index: 1;
+        }
+        .footer-section {
+            text-align: center;
+            flex: 1;
+            padding: 0px 10px 50px 0px; /* 위쪽, 왼쪽 패딩 조정 */
+        }
+         
+        
+        .footer-section a {
+            text-decoration: none;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        /* 좌우 흰색 사각형 */
+        /*#footer-left, #footer-right {
+            background-color: #FFFFFF;
+            width: 5%;
+            height: 10px;
+            position: absolute;
+            top: -10px;
+            border-radius: 0 0 10px 10px;*/
+        }
+        #footer-left {
+            left: calc(10%); /* 왼쪽 위치 */
+        }
+        #footer-right {
+            right: calc(10%); /* 오른쪽 위치 */
+        }
     </style>
 </head>
-
 <body>
-    <div id="wrap">
-        <div id="header"> 
-            <div class="menu1"><a href="{{ url_for('placereservation') }}" style="color: black; text-decoration: none;">예약하기</a></div>
-            <div class="menu2"><a href="{{ url_for('check_cancel') }}" style="color: black; text-decoration: none;">예약확인 및 취소</a></div>
-            <div class="menu3"><a href="{{ url_for('support') }}" style="color: black; text-decoration: none;">고객센터</a></div>
-        </div>
+    <!-- 상단 네비게이션 바 -->
+    <div id="navbar">
+        <a href="{{ url_for('reservation') }}" class="active">예약하기</a>
+        <a href="{{ url_for('check_cancel') }}">예약확인 및 취소</a>
+        <a href="{{ url_for('operation_info') }}">운행정보</a>
+        <a href="{{ url_for('support') }}">고객센터</a>
+    </div>
 
-        <div id="point"> 
-        <div class="bar"></div>
+    <!-- 메인 컨텐츠 -->
+    <div id="main-content">
+        <img src="{{ url_for('static', filename='images/main_image.png') }}" alt="메인 이미지">
+    </div>
+
+    <!-- 하단 섹션 -->
+    <div id="footer-container">
+        <div id="footer-left"></div>
+        <div id="footer">
+            <div class="footer-section">
+                <a href="{{ url_for('support') }}">자주 묻는 질문</a>
+            </div>
+            <div class="footer-section">
+                <a href="#">예약서비스 업데이트 안내</a>
+            </div>
+            <div class="footer-section">
+                <a href="#">서비스 이용약관 개정 안내</a>
+            </div>
         </div>
-        <div id="slider">
-            <img src="{{ url_for('static', filename='images/buslogo.png') }}" alt="버스 로고">
-        </div>
+        <div id="footer-right"></div>
     </div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>예약확인취소 페이지</title>
+    <title>운행정보 페이지</title>
     <style>
         * {
             margin: 0;
@@ -91,7 +91,7 @@
         }
         #status-bar .status-step.active {
             position: relative;
-            font-size: 30px;
+            font-size: 25px;
              background-color: #d3d3d3;
             font-weight: bold;
             color: #3366FF;
@@ -177,9 +177,9 @@
         <!-- 왼쪽 메뉴 섹션 -->
         <div id="menu">
             <h2>Menu</h2>
-            <a href="{{ url_for('check_cancel') }}"class="active">예약 확인/취소</a>
-            <a href="{{ url_for('placereservation') }}" >예약하기</a>
-            <a href="{{ url_for('operation_info') }}">운행정보</a>
+            <a href="{{ url_for('operation_info') }}" class="active">운행정보</a>
+                        <a href="{{ url_for('placereservation') }}" >예약하기</a>
+            <a href="{{ url_for('check_cancel') }}">예약 확인/취소</a>
             <a href="{{ url_for('support') }}" >고객센터</a>
          <!-- 홈 버튼 섹션 -->
          <div id="home-button">
@@ -192,8 +192,8 @@
 
         <!-- 세로 상태 표시줄 -->
         <div id="status-bar">
-            <div class="status-step active">예약 확인</div>
-            <div class="status-step disabled">예약 취소</div>
+            <div class="status-step active">운행 전체 일정</div>
+            <div class="status-step disabled">자주 가는 지역</div>
             <div class="status-step disabled">기타</div>
             <div class="status-step disabled">기타</div>
         </div>
