@@ -118,16 +118,7 @@
             margin-right: auto;
         }
 
-        /* 오른쪽 컨텐츠 섹션 */
-        #content {
-            width: 50%;
-            padding: 20px;
-        }
-        #content h1 {
-            font-size: 22px;
-            color: #3366FF;
-            margin-bottom: 20px;
-        }
+    
         /* 오른쪽 컨텐츠 섹션 */
         #content {
             width: 50%;
@@ -152,6 +143,188 @@
             font-size: 24px;
             font-weight: bold;
         }
+
+        .region-selection {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .location-section {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .location-label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4A90E2;
+            margin-bottom: 5px;
+        }
+        
+        .search-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+        }
+    
+
+        .search-icon {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            right: 60px;
+             
+        }
+
+        .search-icon img {
+            width: 50px;  /* 검색 아이콘 크기를 조금 더 크게 */
+            height: 50px;
+            
+        }
+
+        /* 검색 칸을 포함한 검색 바 스타일 수정 */
+        .search-bar input {
+            width: calc(100% - 50px);  /* 너비 조정 */
+            padding: 15px;  /* 패딩을 늘려서 더 크고 편하게 입력할 수 있도록 조정 */
+            font-size: 22px;  /* 글자 크기를 크게 조정 */
+            border: 2px solid #4A90E2;
+            border-radius: 10px;  /* 둥글기를 조금 더 부드럽게 조정 */
+        }
+
+        /* 위치 버튼 스타일 수정 */
+        .location-button {
+            padding: 15px 25px;  /* 버튼의 크기를 확대 */
+            background-color: #005f73;
+            color: #ffffff;
+            border: none;
+            border-radius: 20px;
+            font-size: 20px;  /* 버튼의 글자 크기를 더 크게 */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .location-button:hover {
+            background-color: #0a9396;
+        }
+
+            /* 입력 필드 라벨 스타일 수정 */
+            .location-label {
+                font-size: 24px;  /* 라벨의 글자 크기를 더 크게 */
+                font-weight: bold;
+                color: #4A90E2;
+                margin-bottom: 10px;
+            }
+
+            /* 자주 찾는 지역 설명 글자 */
+            .frequent-locations p {
+                font-size: 22px;  /* 글자 크기를 키워 가독성을 높임 */
+                color: #333;
+                margin-right: 10px;
+            }
+
+            /* 버튼 섹션 스타일 */
+            .button-section {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            /* 이전 단계 버튼 스타일 */
+            .previous-button {
+                display: inline-block;
+                padding: 20px 40px;  /* 버튼 크기와 패딩 */
+                font-size: 24px;  /* 글자 크기 */
+                background-color: #f0ad4e;  /* 오렌지색 배경 */
+                color: #ffffff;
+                text-decoration: none;
+                border-radius: 10px;
+                text-align: center;
+                transition: background-color 0.3s;
+            }
+
+            .previous-button:hover {
+                background-color: #ec971f;  /* 마우스를 올렸을 때 조금 더 진한 오렌지색 */
+            }
+
+            /* 제출 버튼 스타일 수정 */
+            .submit-button {
+                padding: 20px 40px;  /* 버튼 크기와 패딩 확대 */
+                font-size: 24px;  /* 글자 크기 확대 */
+                background-color: #007bff;  /* 파란색 배경 */
+                color: #ffffff;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+
+            .submit-button:hover {
+                background-color: #0056b3;  /* 마우스를 올렸을 때 조금 더 진한 파란색 */
+            }
+                
+            /* 모달 창 스타일 */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+            }
+            
+            .modal-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #fff;
+                padding: 40px;
+                border-radius: 10px;
+                text-align: center;
+                width: 80%;
+                max-width: 800px;
+            }
+            
+            .close {
+                position: absolute;
+                top: 10px;
+                right: 20px;
+                font-size: 30px;
+                cursor: pointer;
+            }
+            
+            .terminal-selection {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+            }
+            
+            .terminal-section {
+                width: 45%;
+            }
+            
+            .confirm-button {
+                padding: 10px 20px;
+                font-size: 18px;
+                background-color: #007bff;
+                color: #ffffff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+            
+            .confirm-button:hover {
+                background-color: #0056b3;
+            }
         /* 홈 화면 버튼 스타일 */
         #home-button {
             margin-top: auto;
@@ -192,8 +365,8 @@
 
         <!-- 세로 상태 표시줄 -->
         <div id="status-bar">
-            <div class="status-step active">일정선택</div>
-            <div class="status-step disabled">지역선택</div>
+            <div class="status-step disabled">일정선택</div>
+            <div class="status-step active">지역선택</div>
             <div class="status-step disabled">좌석선택</div>
             <div class="status-step disabled">결제하기</div>
         </div>
@@ -203,9 +376,159 @@
         <div id="content">
             <h1>일정을 선택해주세요</h1>
             <div class="box">
-                여기에 달력 또는 예약 정보를 표시합니다.
+                <form method="POST" action="{{ url_for('placereservation') }}">
+                    <div class="region-selection">
+                        <!-- 출발 지역 -->
+                        <div class="location-section">
+                            <label for="departure" class="location-label">출발지</label>
+                            <div class="search-bar">
+                                <input type="text" id="departure" name="departure" placeholder="출발지를 입력하세요..." required>
+                                <button type="button" class="search-icon" onclick="openModal('departure')">
+                                    <img src="{{ url_for('static', filename='images/search_icon.png') }}" alt="Search Icon">
+                                </button>
+                            </div>
+                            <div class="frequent-locations">
+                                <p>자주 찾는 지역</p>
+                                <button type="button" class="location-button" onclick="selectLocation('departure', '지역1')">지역1</button>
+                                <button type="button" class="location-button" onclick="selectLocation('departure', '지역2')">지역2</button>
+                                <button type="button" class="location-button" onclick="selectLocation('departure', '지역3')">지역3</button>
+                                <button type="button" class="location-button" onclick="selectLocation('departure', '지역4')">지역4</button>
+                            </div>
+                        </div>
+        
+                        <!-- 도착 지역 -->
+                        <div class="location-section">
+                            <label for="destination" class="location-label">도착지</label>
+                            <div class="search-bar">
+                                <input type="text" id="destination" name="destination" placeholder="도착지를 입력하세요..." required>
+                                <button type="button" class="search-icon" onclick="openModal('destination')">
+                                    <img src="{{ url_for('static', filename='images/search_icon.png') }}" alt="Search Icon">
+                                </button>
+                            </div>
+                            <div class="frequent-locations">
+                                <p>자주 찾는 지역</p>
+                                <button type="button" class="location-button" onclick="selectLocation('destination', '지역1')">지역1</button>
+                                <button type="button" class="location-button" onclick="selectLocation('destination', '지역2')">지역2</button>
+                                <button type="button" class="location-button" onclick="selectLocation('destination', '지역3')">지역3</button>
+                                <button type="button" class="location-button" onclick="selectLocation('destination', '지역4')">지역4</button>
+                            </div>
+                        </div>
+        
+                        <br>
+                        <div class="button-section">
+                        <a href="{{ url_for('reservation') }}" class="previous-button">이전 단계</a>
+                        <button type="submit" class="submit-button">다음 단계로</button>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
+        
+        <!-- 모달 창 -->
+        <div id="searchModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>터미널 검색</h2>
+                
+                <!-- 출발지와 도착지 선택 영역 -->
+                <div class="terminal-selection">
+                    <div class="terminal-section">
+                        <h3>출발지 주요 터미널</h3>
+                        <div class="search-bar">
+                            <input type="text" id="departureSearch" placeholder="지역 선택" oninput="filterList('departureList', 'departureSearch')">
+                            <button type="button" class="search-icon">
+                                <img src="{{ url_for('static', filename='images/search_icon.png') }}" alt="Search Icon">
+                            </button>
+                        </div>
+                        <select id="departureList" size="10" style="width: 100%; margin-top: 10px;">
+                            <!-- 여기에 출발지 목록이 추가됩니다 -->
+                        </select>
+                    </div>
+                    
+                    <div class="terminal-section">
+                        <h3>도착지 주요 터미널</h3>
+                        <div class="search-bar">
+                            <input type="text" id="destinationSearch" placeholder="지역 선택" oninput="filterList('destinationList', 'destinationSearch')">
+                            <button type="button" class="search-icon">
+                                <img src="{{ url_for('static', filename='images/search_icon.png') }}" alt="Search Icon">
+                            </button>
+                        </div>
+                        <select id="destinationList" size="10" style="width: 100%; margin-top: 10px;">
+                            <!-- 여기에 도착지 목록이 추가됩니다 -->
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="button" onclick="confirmSelection()" class="confirm-button" style="margin-top: 20px;">확인</button>
+            </div>
+        </div>
+
+        <script>
+            function selectLocation(inputId, locationValue) {
+                document.getElementById(inputId).value = locationValue;
+            }
+
+             // 검색 아이콘 클릭 시 입력 필드로 포커스를 이동시키는 함수
+            function focusInput(inputId) {
+               document.getElementById(inputId).focus();
+                }
+
+                let activeInputId = "";
+
+                // 모달 열기
+                function openModal(inputId) {
+                    activeInputId = inputId;
+                    document.getElementById("searchModal").style.display = "block";
+                    
+                    // 모달을 열 때 출발지와 도착지 목록을 초기화
+                    populateSelectOptions('departureList', ['서울', '부산', '대구', '광주', '인천', '대전']);
+                    populateSelectOptions('destinationList', ['서울', '부산', '대구', '광주', '인천', '대전']);
+                }
+            
+                // 모달 닫기
+                function closeModal() {
+                    document.getElementById("searchModal").style.display = "none";
+                    activeInputId = "";
+                }
+            
+                // 출발지 또는 도착지 선택 목록 채우기
+                function populateSelectOptions(listId, options) {
+                    const selectElement = document.getElementById(listId);
+                    selectElement.innerHTML = "";  // 기존 항목 제거
+                    options.forEach(option => {
+                        let opt = document.createElement("option");
+                        opt.value = option;
+                        opt.text = option;
+                        selectElement.appendChild(opt);
+                    });
+                }
+            
+                // 입력 필드에서 검색어를 기반으로 목록 필터링
+                function filterList(listId, searchInputId) {
+                    const filter = document.getElementById(searchInputId).value.toLowerCase();
+                    const selectElement = document.getElementById(listId);
+                    const options = selectElement.options;
+            
+                    for (let i = 0; i < options.length; i++) {
+                        const optionText = options[i].text.toLowerCase();
+                        options[i].style.display = optionText.includes(filter) ? "" : "none";
+                    }
+                }
+            
+                // 모달에서 선택 후 확인 버튼 클릭
+                function confirmSelection() {
+                    let departureValue = document.getElementById("departureList").value;
+                    let destinationValue = document.getElementById("destinationList").value;
+            
+                    if (activeInputId === 'departure') {
+                        document.getElementById('departure').value = departureValue;
+                    } else if (activeInputId === 'destination') {
+                        document.getElementById('destination').value = destinationValue;
+                    }
+            
+                    closeModal();
+                }
+            </script>
+
+        </script>
 </body>
 </html>
