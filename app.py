@@ -35,6 +35,8 @@ def seat_selection():
 def check_cancel():
     return render_template('check_cancel.html')
 
+
+
 @app.route('/support')
 def support():
     return render_template('support.html')
@@ -42,6 +44,17 @@ def support():
 @app.route('/operation_info')
 def operation_info():
     return render_template('operation_info.html')
+
+@app.route('/check')
+def check():
+    return render_template('check.html')
+
+# 결제 페이지 라우트 추가
+@app.route('/payment')
+def payment():
+    return render_template('payment.html')
+
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5001, debug=True)

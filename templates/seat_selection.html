@@ -151,7 +151,223 @@
             color: #4A90E2;
             font-size: 24px;
             font-weight: bold;
+            flex-direction: column; 
+     
         }
+        /* 선택한 인원수와 출발 시간 선택 섹션 */
+        .selection-section {
+            display: flex;
+            justify-content: space-between;
+            /*align-items: center;*/
+            margin-bottom: 20px;
+            gap: 20px;
+            
+        }
+        .selection-section label {
+            font-size: 20px;
+            font-weight: bold; 
+            text-align: left;
+        }
+        .selection-section select {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 2px solid #4A90E2;
+            background-color: #f9f9f9;
+        }
+
+        /* 선택된 좌석 표시 */
+        #selected-seat {
+            font-size: 18px;
+            color: #007bff;
+            font-weight: bold;
+            margin-top: 30px;
+        }
+
+        /* 하단 버튼 섹션 */
+        .button-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        .button-section a {
+            padding: 25px 45px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            
+        }
+        .button-section .previous-button {
+            background-color: #f0ad4e;
+            color: white;
+        }
+        .button-section .previous-button:hover {
+            background-color: #ec971f;
+        }
+        .button-section .next-button {
+            background-color: #007bff;
+            color: white;
+        }
+        .button-section .next-button:hover {
+            background-color: #0056b3;
+        }
+
+        .empty-box {
+            width: 900px;
+            height: 400px;
+            background-color: #e9ecef;
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow-y: auto; /* 스크롤 추가 */
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid #d1d1d1;
+            padding: 10px;
+            font-size: 16px;
+        }
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        .seat-select-button {
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .seat-select-button:hover {
+            background-color: #0056b3;
+        }
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 700px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 좌석 레이아웃 */
+        .seat-layout {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* 운전석 및 출입구 라벨 */
+        .label-row {
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 좌석 컨테이너 */
+        .seat-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        /* 좌석 열 */
+        .seat-column.left-seats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            grid-auto-rows: 60px; /* 좌석 높이 설정 */
+        }
+        
+        .seat-column.right-seats {
+            display: grid;
+            gap: 10px;
+            grid-auto-rows: 60px; /* 좌석 높이 설정 */
+        }
+
+        /* 좌석 */
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .seat.selected {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        /* 창가 라벨 */
+        .window-label {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* 좌석 사이의 통로 */
+        .aisle {
+            width: 40px;  /* 통로 너비 */
+        }
+
+        /* 선택된 좌석 정보 스타일 */
+        #selected-seat-info {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 팝업 닫기 버튼 스타일 */
+        .popup-close {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .popup-close:hover {
+            background-color: #0056b3;
+        }
+
+        * 버튼 섹션 위치 변경 */
+        .button-section {
+            display: flex;
+            justify-content: flex-end; /* 오른쪽으로 배치 */
+            gap: 20px;
+            margin-top: 20px;
+            width: 100%;
+        }
+
         /* 홈 화면 버튼 스타일 */
         #home-button {
             margin-top: auto;
@@ -199,13 +415,202 @@
         </div>
         
 
-        <!-- 오른쪽 컨텐츠 섹션 -->
-        <div id="content">
-            <h1>일정을 선택해주세요</h1>
+         <!-- 오른쪽 컨텐츠 섹션 -->
+         <div id="content">
+            <h1>좌석 선택 페이지</h1>
             <div class="box">
-                여기에 달력 또는 예약 정보를 표시합니다.
-            </div>
+                <!-- 선택한 인원수 및 출발 시간 선택 -->
+                <div class="selection-section">
+                    <label for="people-count">선택한 인원수:</label>
+                    <span id="people-count">{{ selected_people }}</span>
+                    
+                    <label for="departure-time">출발 시간 선택:</label>
+                    <select id="departure-time">
+                        <option value="04:00 이후">07:00 이후</option>
+                        <option value="08:00 이후">08:00 이후</option>
+                        <option value="12:00 이후">10:00 이후</option>
+                        <option value="16:00 이후">11:00 이후</option>
+                        <option value="04:00 이후">12:00 이후</option>
+                        <option value="08:00 이후">13:00 이후</option>
+                        <option value="12:00 이후">14:00 이후</option>
+                        <option value="16:00 이후">15:00 이후</option>
+                    </select>
+
+                    <label for="bus-grade">버스 등급:</label>
+                    <select id="bus-grade">
+                        <option value="일반">일반</option>
+                        <option value="우등">우등</option>
+                    </select>
+                </div>
+
+                <!-- 중간의 빈 박스 (추후 기능 추가 예정) -->
+                 <!-- 동적으로 표시되는 표 -->
+                 <div class="empty-box">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>출발 시간</th>
+                                <th>버스 등급</th>
+                                <th>총 좌석</th>
+                                <th>예매 가능 좌석</th>
+                                <th>좌석 선택</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>07:00 이후</td>
+                                <td>일반</td>
+                                <td>24</td>
+                                <td></td>
+                                <td><button class="seat-select-button" onclick="openSeatSelection()">좌석 선택</button></td>
+                            </tr>
+                            <tr>
+                                <td>08:00 이후</td>
+                                <td>우등</td>
+                                <td>18</td>
+                                <td></td>
+                                <td><button class="seat-select-button" onclick="openSeatSelection()">좌석 선택</button></td>
+                            </tr>
+                            <!-- 추가적인 행들을 필요에 따라 여기에 추가 -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="seat-selection-popup" class="popup">
+                    <h2>좌석 선택</h2>
+                    <div class="seat-layout">
+                        <!-- 운전석 표시 -->
+                        <div class="label-row" style="grid-column: span 2;">
+                            <span class="label">운전석</span>
+                        </div>
+                        <div class="seat-container">
+                            <!-- 왼쪽 창가 -->
+                            <div class="column window-label-left">
+                                <div class="window-label">창가</div>
+                            </div>
+        
+                            <!-- 좌석 배치: 왼쪽 두 줄 -->
+                            <div class="seat-column left-seats">
+                                <!-- 좌석 배치 동적 생성 -->
+                            </div>
+        
+                            <!-- 좌석 공백 (가운데 통로) -->
+                            <div class="aisle"></div>
+        
+                            <!-- 좌석 배치: 오른쪽 두 줄 또는 한 줄 -->
+                            <div class="seat-column right-seats">
+                                <!-- 좌석 배치 동적 생성 -->
+                            </div>
+        
+                            <!-- 오른쪽 창가 -->
+                            <div class="column window-label-right">
+                                <div class="window-label">창가</div>
+                            </div>
+                        </div>
+        
+                        <!-- 출입구 표시 -->
+                        <div class="label-row">
+                            <span class="label">출입구</span>
+                        </div>
+                    </div>
+                    <div id="selected-seat-info">선택된 좌석: 없음</div>
+                    <button class="popup-close" onclick="closeSeatSelection('{{ url_for('seat_selection') }}')">확인</button>
+                </div>
+                 <!-- 하단 버튼 섹션 -->
+                 <div class="button-section">
+                    <a href="{{ url_for('placereservation') }}" class="previous-button">이전 단계</a>
+                    <a href="{{ url_for('payment') }}" class="next-button">결제하기</a>
+                </div>
         </div>
     </div>
+    </div>
+    <script>
+        function updateTable() {
+            const departureTime = document.getElementById("departure-time").value;
+            const busGrade = document.getElementById("bus-grade").value;
+
+            let totalSeats = busGrade === "일반" ? 24 : 18;
+
+            const tableBody = document.querySelector(".empty-box tbody");
+            tableBody.innerHTML = `
+                <tr>
+                    <td>${departureTime}</td>
+                    <td>${busGrade}</td>
+                    <td>${totalSeats}</td>
+                    <td></td>
+                    <td><button class="seat-select-button" onclick="openSeatSelection()">좌석 선택</button></td>
+                </tr>
+            `;
+        }
+
+        function openSeatSelection() {
+            const popup = document.getElementById('seat-selection-popup');
+            const busGrade = document.getElementById("bus-grade").value;
+        
+            const leftSeatColumn = document.querySelector(".seat-column.left-seats");
+            const rightSeatColumn = document.querySelector(".seat-column.right-seats");
+        
+            // 좌석 배치 초기화
+            leftSeatColumn.innerHTML = "";
+            rightSeatColumn.innerHTML = "";
+        
+            // 좌석 배치 업데이트
+            let totalLeftSeats = 12; // 왼쪽은 항상 12개의 좌석
+            let totalRightSeats = busGrade === "일반" ? 12 : 6; // 오른쪽은 일반 12개, 우등 6개
+        
+            // 왼쪽 두 줄 좌석 생성
+            for (let i = 1; i <= totalLeftSeats; i++) {
+                const seat = document.createElement("div");
+                seat.className = "seat";
+                seat.textContent = i;
+                leftSeatColumn.appendChild(seat);
+            }
+        
+            // 오른쪽 좌석 생성
+            rightSeatColumn.style.gridTemplateColumns = busGrade === "일반" ? "repeat(2, 1fr)" : "repeat(1, 1fr)";
+            for (let i = 13; i < 13 + totalRightSeats; i++) {
+                const seat = document.createElement("div");
+                seat.className = "seat";
+                seat.textContent = i;
+                rightSeatColumn.appendChild(seat);
+            }
+        
+            popup.style.display = 'flex';
+        
+            // 좌석 선택 이벤트 핸들러 설정
+            const seats = document.querySelectorAll(".seat");
+            const selectedSeatInfo = document.getElementById("selected-seat-info");
+            let selectedSeats = [];
+            const peopleCount = parseInt(document.getElementById("people-count").textContent);
+        
+            seats.forEach(seat => {
+                seat.addEventListener("click", () => {
+                    if (seat.classList.contains("selected")) {
+                        seat.classList.remove("selected");
+                        selectedSeats = selectedSeats.filter(s => s !== seat.textContent);
+                    } else if (selectedSeats.length < peopleCount) {
+                        seat.classList.add("selected");
+                        selectedSeats.push(seat.textContent);
+                    }
+        
+                    selectedSeatInfo.textContent = "선택된 좌석: " + selectedSeats.map(seat => seat + "번 좌석").join(", ");
+                });
+            });
+        }
+
+        function closeSeatSelection() {
+            const popup = document.getElementById('seat-selection-popup');
+            const selectedSeatInfoPopup = document.getElementById("selected-seat-info");
+            const selectedSeatInfoMain = document.getElementById("selected-seat");
+
+            // 팝업에서 선택된 좌석 정보를 메인 페이지에 업데이트
+            selectedSeatInfoMain.textContent = selectedSeatInfoPopup.textContent;
+
+            // 팝업 닫기 후 페이지 이동
+            window.location.href = url;
+        }
+
+    
+           
+</script>
 </body>
 </html>

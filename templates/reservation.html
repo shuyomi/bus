@@ -255,14 +255,18 @@
         }
         .summary button {
             margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 20px;
+            padding: 20px 30px;
+            font-size: 24px;
+            font-weight: bold;
             cursor: pointer;
-            background-color: #4A90E2;
             color: #ffffff;
             border: none;
             border-radius: 5px;
             margin-left: 100px;
+            background-color: #007bff;
+        }
+        .summary button:hover {
+            background-color: #0056b3; /* 호버 시 배경색 변경 */
         }
         /* 홈 화면 버튼 스타일 */
         #home-button {
@@ -363,6 +367,7 @@
                     <p id="selected-trip">편도/왕복: 편도</p>
                     <p id="selected-passengers">성인: 0명, 초중고: 0명, 유아: 0명</p>
                     <button onclick="location.href='{{ url_for('placereservation') }}'">지역선택</button>
+                
                 </div>
             </div>
         </div>

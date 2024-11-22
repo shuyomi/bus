@@ -92,7 +92,7 @@
         #status-bar .status-step.active {
             position: relative;
             font-size: 30px;
-            background-color: #d3d3d3;
+             background-color: #d3d3d3;
             font-weight: bold;
             color: #3366FF;
             padding: 20px 30px; /* 사각형을 더 넓게 조정 */
@@ -104,47 +104,53 @@
             opacity: 0.7; /* 투명도를 80%로 설정 */
         }
 
+        
         #status-bar .status-step.disabled {
             color: #b0b0b0;
+           
         }   
         #status-bar .status-icon {
             width: 50px;  /* 원하는 크기로 설정 */
             height: 120px;
-            margin: 5px 0; /* 상하 간격 설정 */
+             margin: 5px 0; /* 상하 간격 설정 */
             display: block; /* 세로 정렬을 위한 설정 */
             margin-left: auto;
             margin-right: auto;
         }
-        /* 홈 화면 버튼 스타일 */
-        #home-button {
-            margin-top: auto;
-            text-align: center;
-        }
-        #home-button img {
-            width: 80px;
-            height: 80px;
-            margin-bottom: 5px;
-        }
-        #home-button a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-        }
+            /* 홈 화면 버튼 스타일 */
+            #home-button {
+                margin-top: auto;
+                
+                text-align: center;
+            }
+        
+            #home-button img {
+                width: 80px;
+                height 80px;
+                margin-bottom: 5px;
+            }
+            #home-button a {
+                color: white;
+                text-decoration: none;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            
         /* 오른쪽 컨텐츠 섹션 */
         #content {
             width: 50%;
             padding: 20px;
+            color: #ffffff;
         }
         #content h1 {
-            font-size: 24px;
-            color: #3366FF;
+            font-size: 20px;
+            color: #007bff;
             margin-bottom: 20px;
         }
         .white-box {
             width: 1000px;
-            padding: 30px;
-            height: 800px;
+            padding: 20px;
+            height: 830px;
             background-color: #ffffff;
             border-radius: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -152,42 +158,9 @@
             color: #333;
             text-align: center;
             font-size: 18px;
-            margin-top: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            margin-top: -10px; /* 화이트 박스를 위로 올리기 위해 추가 */
         }
-        .input-field {
-            width: 80%;
-            padding: 15px;
-            margin-bottom: 50px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            font-size: 16px;
-        }
-        .submit-button {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        .input-label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-            text-align: center;
-        }
-        .form-container {
-            border: 2px solid #333;
-            border-radius: 15px;
-            padding: 30px;
-            width: 90%;
-            text-align: center;
-        }
+       
     </style>
 </head>
 <body>
@@ -195,18 +168,18 @@
         <!-- 왼쪽 메뉴 섹션 -->
         <div id="menu">
             <h2>Menu</h2>
-            <a href="{{ url_for('check_cancel') }}" class="active">예약 확인/취소</a>
-            <a href="{{ url_for('reservation') }}">예약하기</a>
+            <a href="{{ url_for('check_cancel') }}"class="active">예약 확인/취소</a>
+            <a href="{{ url_for('reservation') }}" >예약하기</a>
             <a href="{{ url_for('operation_info') }}">운행정보</a>
-            <a href="{{ url_for('support') }}">고객센터</a>
-            <!-- 홈 버튼 섹션 -->
-            <div id="home-button">
-                <a href="{{ url_for('index') }}">
-                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
-                    <div>홈화면으로 돌아가기</div>
-                </a>
-            </div>
+            <a href="{{ url_for('support') }}" >고객센터</a>
+         <!-- 홈 버튼 섹션 -->
+         <div id="home-button">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
+                <div>홈화면으로 돌아가기</div>
+            </a>
         </div>
+    </div>
 
         <!-- 세로 상태 표시줄 -->
         <div id="status-bar">
@@ -215,24 +188,15 @@
             <div class="status-step disabled">기타</div>
             <div class="status-step disabled">기타</div>
         </div>
+        
 
         <!-- 오른쪽 컨텐츠 섹션 -->
         <div id="content">
-            <h1>예약자 정보 입력</h1>
+            <h1>일정을 선택해주세요</h1>
             <div class="white-box">
-                <div class="form-container">
-                    <label class="input-label">성함</label>
-                    <input type="text" class="input-field" placeholder="성함을 입력하세요">
-                    <label class="input-label">생년월일</label>
-                    <input type="text" class="input-field" placeholder="숫자8자리로 입력합니다.">
-                    <label class="input-label">전화번호</label>
-                    <input type="text" class="input-field" placeholder="전화번호를 입력하세요">
-                    <label class="input-label">예약 번호</label>
-                    <input type="text" class="input-field" placeholder="전화번호로 받은 예약 번호를 입력하세요">
-                    <button class="submit-button" onclick="location.href='{{ url_for('check') }}'">예약정보 확인</button>
-                </div>
+                여기에 달력 또는 예약 정보를 표시합니다.
             </div>
         </div>
     </div>
 </body>
-</html>
+</html> 

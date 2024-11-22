@@ -229,10 +229,28 @@
             }
 
             /* 버튼 섹션 스타일 */
+      
             .button-section {
                 display: flex;
                 justify-content: space-between;
-                width: 100%;
+    
+                gap: 20px;
+            }   
+            .button-section a {
+                padding: 25px 45px;
+                font-size: 24px;
+                font-weight: bold;
+                border: none;
+                border-radius: 10px;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                transition: background-color 0.3s;
+                
+            }
+            .button-section .previous-button {
+                background-color: #f0ad4e;
+                color: white;
             }
 
             /* 이전 단계 버튼 스타일 */
@@ -417,7 +435,7 @@
                         <br>
                         <div class="button-section">
                         <a href="{{ url_for('reservation') }}" class="previous-button">이전 단계</a>
-                        <button type="submit" class="submit-button">다음 단계로</button>
+                        <button type="submit" class="submit-button">좌석선택</button>
                     </div>
                 </form>
             </div>

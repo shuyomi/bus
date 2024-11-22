@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약확인취소 페이지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F9F9F9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* 전체 레이아웃 */
+        #container {
+            display: flex;
+            width: 80%;
+            max-width: 1600px;
+            height: 900px;
+            background-color:#d3d3d3;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        /* 외쪽 메뉴 세션 */
+        #menu {
+            width: 15%;
+            background-color: #3366FF;
+            padding: 20px;
+            color: white;
+            box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
+        }
+        #menu h2 {
+            margin-top: 20px;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #B3E5FC;
+        }
+        #menu a {
+            display: block;
+            font-size: 24px;
+            margin: 90px 0px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        #menu a.active {
+            position: relative;
+            font-weight: bold;
+            color: #3366FF;
+            background-color: white;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬을 맞추기 위해 조정 */
+            text-align: center;
+        }
+        #menu a.disabled {
+            color: #d1d1d1;
+            pointer-events: none;
+        }
+       
+        #status-bar {
+            width: 15%;
+            padding: 20px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #4A90E2;
+            font-size: 24px; /* 글자 크기를 크게 설정 */
+            box-shadow: 3px 0 7px rgba(0, 0, 0, 0.2);
+           margin-left: 10px; 
+        }
+        #status-bar .status-step {
+            margin: 62px 0; /* 글자 간의 간격 조정 */
+            font-size: 24px;
+            font-weight: bold;
+            color: #4A90E2;
+            text-align: center;
+        }
+        #status-bar .status-step.active {
+            position: relative;
+            font-size: 30px;
+             background-color: #d3d3d3;
+            font-weight: bold;
+            color: #3366FF;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬를 맞추기 위해 조정 */
+            text-align: center;
+            opacity: 0.7; /* 투명도를 80%로 설정 */
+        }
+
+        
+        #status-bar .status-step.disabled {
+            color: #b0b0b0;
+           
+        }   
+        #status-bar .status-icon {
+            width: 50px;  /* 원하는 크기로 설정 */
+            height: 120px;
+             margin: 5px 0; /* 상하 간격 설정 */
+            display: block; /* 세로 정렬를 위한 설정 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 홈 화면 버튼 스타일 */
+        #home-button {
+            margin-top: auto;
+            
+            text-align: center;
+        }
+    
+        #home-button img {
+            width: 80px;
+            height 80px;
+            margin-bottom: 5px;
+        }
+        #home-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* 오른쪽 컨텐츠 세션 */
+        #content {
+            width: 50%;
+            padding: 20px;
+            color: #ffffff;
+        }
+        #content h1 {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .white-box {
+            width: 1000px;
+            padding: 20px;
+            height: 830px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-size: 18px;
+            margin-top: -10px; /* 화이트 박스를 위로 올리기 위해 추가 */
+        }
+        .section {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #d3d3d3;
+            border-radius: 10px;
+            text-align: left;
+        }
+        .input-label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .input-field {
+            width: 90%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+        .payment-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            width: 90%;
+            margin-top: 0px;
+        }
+        /* 모달 스타일 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            width: 800px;
+            height: 500px;
+            text-align: center;
+        }
+        .modal-header {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #007bff;
+        }
+        .modal-body {
+            margin-bottom: 30px;
+            font-size: 20px;
+        }
+        .modal-footer {
+            text-align: center;
+        }
+        .close-button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- 외쪽 메뉴 세션 -->
+        <div id="menu">
+            <h2>Menu</h2>
+            <a href="{{ url_for('check_cancel') }}"class="active">예약하기</a>
+            <a href="{{ url_for('placereservation') }}" >예약 확인/취소</a>
+            <a href="{{ url_for('operation_info') }}">운행정보</a>
+            <a href="{{ url_for('support') }}" >고객센터</a>
+         <!-- 홈 버튼 세션 -->
+         <div id="home-button">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
+                <div>홈화면으로 돌아가기</div>
+            </a>
+        </div>
+    </div>
+
+        <!-- 세로 상태 표시줄 -->
+        <div id="status-bar">
+            <div class="status-step disabled">일정선택</div>
+            <div class="status-step disabled">지역선택</div>
+            <div class="status-step disabled">좌석선택</div>
+            <div class="status-step active">결제하기</div>
+        </div>
+        
+
+        <!-- 오른쪽 컨텐츠 세션 -->
+        <div id="content">
+            <h1>개인정보 입력 및 결제하기</h1>
+                <div class="white-box">
+                    <!-- 개인정보 입력 -->
+                    <div class="section">
+                        <h2>개인정보 입력</h2>
+                        <label class="input-label">성학</label>
+                        <input type="text" class="input-field" placeholder="성학을 입력하세요" id="name">
+                        <label class="input-label">생년월일 (8자리로 입력합니다.)</label>
+                        <input type="text" class="input-field" placeholder="YYYYMMDD">
+                        <label class="input-label">전화번호 (전화번호로 예예번호가 발송됩니다. 정확하게 입력해주세요)</label>
+                        <input type="text" class="input-field" placeholder="전화번호를 입력하세요" id="phone">
+                        <label class="input-label">이메일</label>
+                        <input type="email" class="input-field" placeholder="이메일을 입력하세요">
+                    </div>
+                    <!-- 결제시점 -->
+                    <div class="section">
+                        <h2>결제 입력</h2>
+                        <label class="input-label">카드사 선택</label>
+                        <select class="input-field">
+                            <option value="">-- 카드사 선택 --</option>
+                            <option value="visa">VISA</option>
+                            <option value="mastercard">MasterCard</option>
+                            <option value="amex">American Express</option>
+                        </select>
+                        <label class="input-label">카드번호</label>
+                        <input type="text" class="input-field" placeholder="카드 번호를 입력하세요">
+                        <label class="input-label">CVC 번호</label>
+                        <input type="text" class="input-field" placeholder="CVC 번호를 입력하세요">
+                        <label class="input-label">등급기간 (년/월)</label>
+                        <input type="text" class="input-field" placeholder="MM/YY">
+                    </div>
+                    <!-- 결제 버튼 -->
+                    <button class="payment-button" onclick="showModal()">결제 완료</button>
+                </div> 
+            </div>
+    </div>
+
+    <!-- 모달 -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">예매 완료</div>
+            <div class="modal-body">
+                <p>성함: <span id="confirm-name"></span></p>
+                <p>전화번호: <span id="confirm-phone"></span></p>
+                <p>출발지: (선택 예정)</p>
+                <p>도착지: (선택 예정)</p>
+                <p>출발 시간: (선택 예정)</p>
+                <p>도착 시간: (선택 예정)</p>
+                <p>좌석 번호: (선택 예정)</p>
+            </div>
+            <div class="modal-footer">
+                <button class="close-button" onclick="closeModal()">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showModal() {
+            document.getElementById('confirm-name').innerText = document.getElementById('name').value;
+            document.getElementById('confirm-phone').innerText = document.getElementById('phone').value;
+            document.getElementById('confirmationModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            window.location.href = "{{ url_for('index') }}";
+        }
+    </script>
+</body>
+</html>
