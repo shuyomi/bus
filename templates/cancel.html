@@ -161,24 +161,22 @@
         }
 
         .box{
-            width: 500px;
-            height: 550px;
+            width: 520px;
+            height: 570px;
             background-color: #007BFF;
-            border-radius: 20px;
+            border-radius: 5px;
             padding: 30px;
             margin: 30px 0;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             line-height: 1.6;
-            text-align: center;
-            color: #ffffff;
+          
           
         }
 
         /* 예약 상세정보 박스 */
         .details-box {
-            border: 3px solid #CCCCCC;
             width: 500px;
-            height: 500px;
+            height: 480px;
             background-color: #ffffff;
             border-radius: 5px;
             padding: 30px;
@@ -187,10 +185,34 @@
             text-align: left;
             line-height: 1.6;
             color: #333;
-            left: -30px;
+            left: -20px;
             position: relative;
             bottom: 20px;
         }
+
+        .cancel-box{
+            border: 3px solid #CCCCCC;
+            width: 480px;
+            height: 230px;
+            background-color: #EEF2F5;
+            border-radius: 5px;
+            position: relative;
+            bottom: 20px;
+            left: -20px;
+            font-weight: bold; 
+            text-align: left; 
+            margin: 10px 0;
+        }
+        .cancel-box p {
+            font-weight: bold;
+            text-align: left;
+            margin: 30px 20px; 0px 0;
+           
+        }
+
+
+
+
         /* 하단 버튼 관리 */
          .button-container {
             position: absolute;
@@ -221,25 +243,76 @@
             background-color: #0056b3;  /* 마우스를 올렸을 때 조금 더 진한 파란색 */
         }
 
+        #cancel-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 580px;
+            height: 330px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 20px;
+        }
+        
+        #cancel-modal h2 {
+            margin-top: 70px;
+            margin-bottom: 40px;
+            text-align: center;
+          
+        }
+        
+        
+        .modal-button-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            
+        }
+
+        .modal-button-container {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .modal-button-container a {
+            padding: 20px 50px;
+            font-size: 24px;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            background-color: #007BFF;
+        }
+        
+        .modal-button-container a:hover {
+            background-color: #0056b3;  /* 마우스를 올렸을 때 조금 더 진한 파란색 */
+        }
+
     </style>
-</head>
-<body>
-    <div id="container">
-        <!-- 외쪽 메뉴 서식 -->
-        <div id="menu">
-            <h2>Menu</h2>
-            <a href="{{ url_for('check_cancel') }}" class="active">예약 확인/취소</a>
-            <a href="{{ url_for('reservation') }}">예약하기</a>
-            <a href="{{ url_for('operation_info') }}">운행정보</a>
-            <a href="{{ url_for('support') }}">고객센터</a>
-            <!-- 홈 버튼 서식 -->
-            <div id="home-button">
-                <a href="{{ url_for('index') }}">
-                    <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
-                    <div>홈화면으로 돌아가기</div>
-                </a>
-            </div>
-        </div>
+        </head>
+        <body>
+            <div id="container">
+                <!-- 외쪽 메뉴 서식 -->
+                <div id="menu">
+                    <h2>Menu</h2>
+                    <a href="{{ url_for('check_cancel') }}" class="active">예약 확인/취소</a>
+                    <a href="{{ url_for('reservation') }}">예약하기</a>
+                    <a href="{{ url_for('operation_info') }}">운행정보</a>
+                    <a href="{{ url_for('support') }}">고객센터</a>
+                    <!-- 홈 버튼 서식 -->
+                    <div id="home-button">
+                        <a href="{{ url_for('index') }}">
+                            <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
+                            <div>홈화면으로 돌아가기</div>
+                        </a>
+                    </div>
+                </div>
 
         <!-- 세로 상태 표시줄 -->
         <div id="status-bar">
@@ -254,22 +327,34 @@
             <h1>버스 예약 티켓</h1>
              <div class="white-box">
                 <div class="box">
-                    <h2 style="color: white; font-weight: bold; text-align: center; margin-bottom: 20px;">예약 상세내역</h2>
+                    <h2 style="color: white; font-weight: bold; text-align: center; margin-bottom: 20px;">예약취소 안내사항</h2>
                 <div class="details-box">
-                    <p><strong>출발지:</strong> </p>
-                    <p><strong>도착지:</strong> </p>
-                    <p><strong>소요 시간:</strong> </p>
-                    <p><strong>좌석번호:</strong> </p>
-                    <p><strong>등급:</strong> </p>
-                    <p><strong>운행회사:</strong> </p>
+                    <img src="{{ url_for('static', filename='images/cancel.png') }}" alt="Cancel Image" style="width: 300px; border-radius: 5px; margin-bottom: 20px; display: block; margin-left: auto; margin-right: auto;">
+                <div class="cancel-box">
+                    <p>총 결제 금액: </p>
+                        <p>취소 수수료: </p>
+                        <p>총 반환 금액: </p>
+                    </div>
                 </div>
             </div>
                 <div class="button-container">
-                    <a href="{{ url_for('cancel') }}" class="cancel-button">취소하기</a>
-                    <a href="{{ url_for('index') }}" class="confirm-button">확인</a>
+                    <a href="{{ url_for('cancel') }}" class="cancel-button" onclick="showCancelModal(event)">취소하기</a>
+                    <a href="{{ url_for('index') }}" class="confirm-button">돌아가기</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div id="cancel-modal">
+            <h2>취소가 완료되었습니다.</h2>
+                <div class="modal-button-container">
+                    <a href="{{ url_for('index') }}" class="modal-button">확인</a>
+                </div>
+        </div>
+        <script>
+            function showCancelModal(event) {
+                event.preventDefault();
+                document.getElementById('cancel-modal').style.display = 'block';
+            }
+        </script>
 </body>
 </html>
