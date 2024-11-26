@@ -198,6 +198,7 @@
             bottom: 20px;
         }
         
+        /* 검색 폼 */
         .search-form {
             display: flex;
             gap: 10px;
@@ -205,18 +206,46 @@
             justify-content: center;
             align-items: center;
         }
+    
         .search-form select,
+        .search-form input[type="date"],
         .search-form button {
             padding: 10px;
             font-size: 18px;
             border-radius: 5px;
             border: 1px solid #ccc;
+            outline: none;
         }
+    
+        /* 날짜 선택 필드 스타일 */
+        .search-form input[type="date"] {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px; /* 날짜 선택 칸의 너비 */
+            outline: none; /* 포커스 시 기본 외곽선을 제거 */
+        }
+        
+   
+
+    
+        /* 드롭다운 메뉴 스타일 */
+        .search-form select {
+            width: 200px; /* 드롭다운 메뉴와 날짜 선택 칸의 너비를 동일하게 */
+        }
+    
+        /* 버튼 스타일 */
         .search-form button {
             background-color: #007bff;
             color: #fff;
             border: none;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        .search-form button:hover {
+            background-color: #0056b3;
         }
 
         .arrow-icon {
@@ -273,44 +302,39 @@
         </div>
         
 
-         <div id="content">
+
+          <!-- 컨텐츠 -->
+          <div id="content">
             <h1>운행 정보를 확인하세요.</h1>
             <div class="white-box">
                 <div class="box">
                     <!-- 운행 정보 검색 섹션 -->
-                    <form class="search-form" action="{{ url_for('info') }}" method="get">
-                        <select name="출발지역" required>
+                    <form class="search-form" id="searchForm">
+                        <!-- 날짜 선택 추가 -->
+                        <input type="date" id="travelDate" class="date-picker" required>
+                        <select name="출발지역" id="departureLocation" required>
                             <option value="" disabled selected>출발지 선택</option>
                             <option value="광진구">광진구</option>
                             <option value="종로구">종로구</option>
                             <option value="서초구">서초구</option>
                         </select>
-                        <select name="출발터미널" required>
-                            <option value="" disabled selected>터미널 선택</option>
-                            <option value="동서울종합터미널">동서울종합터미널</option>
-                            <option value="서울고속터미널">서울고속터미널</option>
-                        </select>
                         <span class="arrow-icon">→</span>
-                        <select name="도착지역" required>
+                        <select name="도착지역" id="arrivalLocation" required>
                             <option value="" disabled selected>도착지 선택</option>
                             <option value="동해시">동해시</option>
                             <option value="강릉시">강릉시</option>
                             <option value="속초시">속초시</option>
                         </select>
-                        <select name="도착터미널" required>
-                            <option value="" disabled selected>터미널 선택</option>
-                            <option value="동해시종합버스터미널">동해시종합버스터미널</option>
-                            <option value="강릉시터미널">강릉시터미널</option>
-                        </select>
-                        <button type="submit">조회</button>
+                        <button type="button" id="searchButton">조회</button>
                     </form>
-                    <p class="info-text">출발 터미널과 도착 터미널을 지정하시면 구간의 시간표 및 요금을 확인하실 수 있습니다.</p>
+                    <p class="info-text">날짜, 출발지와 도착지를 지정하시면 구간의 시간표 및 요금을 확인하실 수 있습니다.</p>
 
                     <div class="details-box">
                         <h2>운행정보</h2>
-                        <table class="schedule-table">
+                        <table class="schedule-table" id="scheduleTable">
                             <thead>
                                 <tr>
+                                    <th>날짜</th>
                                     <th>출발</th>
                                     <th>도착</th>
                                     <th>등급</th>
@@ -319,20 +343,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>10:50</td>
-                                    <td>14:07</td>
-                                    <td>일반</td>
-                                    <td>9,600 원</td>
-                                    <td>03:17</td>
-                                </tr>
-                                <tr>
-                                    <td>16:10</td>
-                                    <td>19:27</td>
-                                    <td>일반</td>
-                                    <td>9,600 원</td>
-                                    <td>03:17</td>
-                                </tr>
+                                <!-- 여기에 JavaScript로 데이터가 추가될 예정 -->
                             </tbody>
                         </table>
                     </div>
@@ -340,5 +351,61 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // 임의 데이터베이스
+        const scheduleData = [
+            { date: "2024-11-26", departure: "10:50", arrival: "14:07", grade: "일반", price: "9,600 원", duration: "03:17", from: "광진구", to: "동해시" },
+            { date: "2024-11-27", departure: "16:10", arrival: "19:27", grade: "일반", price: "9,600 원", duration: "03:17", from: "광진구", to: "동해시" },
+            { date: "2024-11-26", departure: "12:30", arrival: "15:50", grade: "프리미엄", price: "12,000 원", duration: "03:20", from: "서초구", to: "강릉시" },
+        ];
+
+        // 검색 버튼 클릭 이벤트 처리
+                document.getElementById("searchButton").addEventListener("click", () => {
+                    const travelDate = document.getElementById("travelDate").value; // 수정된 ID 참조
+                    const departureLocation = document.getElementById("departureLocation").value;
+                    const arrivalLocation = document.getElementById("arrivalLocation").value;
+
+                    // 입력 값 확인
+                    if (!travelDate || !departureLocation || !arrivalLocation) {
+                        alert("날짜, 출발지와 도착지를 모두 선택해주세요.");
+                        return;
+                    }
+
+                    // 운행 정보 테이블에 데이터 추가
+                    const tableBody = document.getElementById("scheduleTable").querySelector("tbody");
+                    tableBody.innerHTML = ""; // 기존 데이터 초기화
+
+                    // 선택한 날짜, 출발지, 도착지에 맞는 데이터만 필터링
+                    const filteredData = scheduleData.filter(
+                        item => item.date === travelDate && item.from === departureLocation && item.to === arrivalLocation
+                    );
+
+                    if (filteredData.length === 0) {
+                        // 데이터가 없을 경우 안내 메시지 추가
+                        tableBody.innerHTML = `
+                            <tr>
+                                <td colspan="6">선택하신 날짜와 구간에 대한 운행 정보가 없습니다.</td>
+                            </tr>
+                        `;
+                        return;
+                    }
+
+                    // 필터링된 데이터 테이블에 추가
+                    filteredData.forEach((item) => {
+                        const row = `
+                            <tr>
+                                <td>${item.date}</td>
+                                <td>${item.departure}</td>
+                                <td>${item.arrival}</td>
+                                <td>${item.grade}</td>
+                                <td>${item.price}</td>
+                                <td>${item.duration}</td>
+                            </tr>
+                        `;
+                        tableBody.innerHTML += row;
+                    });
+                });
+    </script>
 </body>
 </html>

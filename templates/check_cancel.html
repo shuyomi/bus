@@ -163,17 +163,22 @@
             margin-bottom: 50px;
             border-radius: 5px;
             border: 1px solid #ccc;
-            font-size: 16px;
+            font-size: 20px;
         }
         .submit-button {
             background-color: #007bff;
             color: white;
-            padding: 15px 30px;
+            padding: 20px 35px;
             border: none;
             border-radius: 5px;
-            font-size: 16px;
+            font-size: 20px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #0056b3;
         }
         .input-label {
             font-weight: bold;
@@ -183,11 +188,15 @@
         }
         .form-container {
             border: 2px solid #333;
-            border-radius: 15px;
+            border-radius: 40px;
             padding: 30px;
-            
+            height: 600px;
             width: 800px;   
             text-align: center;
+            bottom: -50px;
+            position: relative;
+           
+           
         }
     </style>
 </head>
@@ -228,8 +237,8 @@
                     <input type="text" class="input-field" placeholder="숫자8자리로 입력합니다.">
                     <label class="input-label">전화번호</label>
                     <input type="text" class="input-field" placeholder="전화번호를 입력하세요">
-                    <label class="input-label">예약 번호</label>
-                    <input type="text" class="input-field" placeholder="전화번호로 받은 예약 번호를 입력하세요">
+                    
+                   
                     <button class="submit-button" onclick="location.href='{{ url_for('check') }}'">예약정보 확인</button>
                 </div>
             </div>

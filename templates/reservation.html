@@ -126,6 +126,25 @@
             color: #007bff;
             margin-bottom: 20px;
         }
+        /* 홈 화면 버튼 스타일 */
+        #home-button {
+            margin-top: auto;
+            
+            text-align: center;
+        }
+    
+        #home-button img {
+            width: 80px;
+            height 80px;
+            margin-bottom: 5px;
+        }
+        #home-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
         /* 공통 박스 스타일 */
         .box {
             width: 1000px;
@@ -152,10 +171,13 @@
             font-weight: bold;
             cursor: pointer;
             background-color: #ffffff;
-            color: #3366FF;
-            border: 1px solid #000000;
-            border-radius: 10px;
+            color: #000000;
+            border: 4px solid #007bff;
+            border-radius: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .trip-selection button:hover {
+            background-color: #007bff;  /* 마우스를 올렸을 때 조금 더 진한 파란색 */
         }
 
         /* 인원 선택 섹션 스타일 */
@@ -243,18 +265,47 @@
         .summary {
             margin-top: 0;
             margin-bottom: 20px;
-            text-align: left;
+            text-align: center;
             position: absolute;
-            right: 230px;
-            top: 50%;
+            right: 250px;
+            top: 40%;
+            height:400px;
+            width: 380px;
+            border: 4px solid #007bff;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          
         }
+            /* 스케줄 제목 박스 스타일 */
+            .schedule-titlebox {
+              
+                text-align: center;
+                background-color: #007bff;
+                border-radius: 5px;
+                color: #ffffff;
+                padding: 20px 20px;
+                margin-top: 10px; /* 기존 20px → 10px으로 줄임 */
+            position: relative; /* top 값을 사용할 수 있도록 설정 */
+            top: -10px; /* 살짝 위로 올림 */
+            }
+
+            .schedule-title{
+
+                margin-bottom: 10px;
+                font-size: 24px;
+                color: #ffffff;
+                font-weight: bold;
+                }
+
         .summary p {
             margin-bottom: 10px;
-            font-size: 22px;
+            font-size: 18px;
             color: #007bff;
+            margin-bottom: 40px;
+           
         }
         .summary button {
-            margin-top: 20px;
+            margin-top: -7px;
             padding: 20px 30px;
             font-size: 24px;
             font-weight: bold;
@@ -262,30 +313,13 @@
             color: #ffffff;
             border: none;
             border-radius: 5px;
-            margin-left: 100px;
+            /*margin-left: 100px;*/
             background-color: #007bff;
         }
         .summary button:hover {
             background-color: #0056b3; /* 호버 시 배경색 변경 */
         }
-        /* 홈 화면 버튼 스타일 */
-        #home-button {
-            margin-top: auto;
-            
-            text-align: center;
-        }
-    
-        #home-button img {
-            width: 80px;
-            height 80px;
-            margin-bottom: 5px;
-        }
-        #home-button a {
-            color: white;
-            text-decoration: none;
-            font-size: 20px;
-            font-weight: bold;
-        }
+        
     </style>
 </head>
 <body>
@@ -362,8 +396,10 @@
                
                 <!-- 선택 요약 섹션 -->
                 <div class="summary">
-                    <h2 style="font-size: 26px; margin-bottom: 10px; text-align: left; margin-left: 5px;">선택한 일정 확인</h2>
-                    <p id="selected-schedule" style="display: inline-block; width: 400px;">달력에서 날짜 선택</p>
+                    <div class="schedule-titlebox">
+                    <h2 class="schedule-title">선택한 일정 확인</h2>
+                    </div>
+                    <p id="selected-schedule" style="display: inline-block; ">달력에서 날짜 선택</p>
                     <p id="selected-trip">편도/왕복: 편도</p>
                     <p id="selected-passengers">성인: 0명, 초중고: 0명, 유아: 0명</p>
                     <button onclick="location.href='{{ url_for('placereservation') }}'">지역선택</button>
