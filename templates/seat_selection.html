@@ -278,7 +278,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             width: 800px;
-            height: 700px;
+            height: 750px;
             background-color: white;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -292,17 +292,23 @@
         /* 좌석 레이아웃 */
         .seat-layout {
             width: 100%;
-            height: auto;
+            height: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin-top: 30px;
+            
         }
 
         /* 운전석 및 출입구 라벨 */
         .label-row {
+            display: flex;
+            justify-content: center; /* 라벨 간의 간격을 일정하게 설정 */
+            width: 100%; /* 전체 너비 사용 */
             margin-bottom: 10px;
             font-size: 18px;
             font-weight: bold;
+            gap: 180px;
         }
 
         /* 좌석 컨테이너 */
@@ -328,6 +334,15 @@
             grid-auto-rows: 60px; /* 좌석 높이 설정 */
         }
 
+        /* 하단의 추가 좌석 열 */
+        .seat-row.bottom-seats {
+            display: flex;
+            justify-content: center; /* 좌석을 중앙에 정렬 */
+            gap: 12px; /* 좌석 간의 간격 설정 */
+            margin-top: -10px;        
+        }
+
+
         /* 좌석 */
         .seat {
             width: 50px;
@@ -345,6 +360,8 @@
             background-color: #4caf50;
             color: white;
         }
+        
+        
 
         /* 창가 라벨 */
         .window-label {
@@ -483,9 +500,11 @@
                     <h2>좌석 선택</h2>
                     <div class="seat-layout">
                         <!-- 운전석 표시 -->
-                        <div class="label-row" style="grid-column: span 2;">
+                        <div class="label-row">
                             <span class="label">운전석</span>
+                            <span class="label">출입구</span>
                         </div>
+
                         <div class="seat-container">
                             <!-- 왼쪽 창가 -->
                             <div class="column window-label-left">
@@ -510,11 +529,12 @@
                                 <div class="window-label">창가</div>
                             </div>
                         </div>
-        
-                        <!-- 출입구 표시 -->
-                        <div class="label-row">
-                            <span class="label">출입구</span>
+                                <!-- 하단의 추가 좌석 열 (7번째 열) -->
+                        <div id="bottom-seats-row" class="seat-row bottom-seats">
+                            <!-- JavaScript에서 동적으로 생성 -->
                         </div>
+
+                       
                     </div>
                     <div id="selected-seat-info">선택된 좌석: 없음</div>
                     <button id="popup-close" class="popup-close" onclick="closeSeatSelection()">확인</button>
@@ -546,21 +566,23 @@
             `;
         }
 
-        function openSeatSelection() {
+            function openSeatSelection() {
             const popup = document.getElementById('seat-selection-popup');
             const busGrade = document.getElementById("bus-grade").value;
-        
+
             const leftSeatColumn = document.querySelector(".seat-column.left-seats");
             const rightSeatColumn = document.querySelector(".seat-column.right-seats");
-        
+            const bottomRowContainer = document.getElementById('bottom-seats-row');
+
             // 좌석 배치 초기화
             leftSeatColumn.innerHTML = "";
             rightSeatColumn.innerHTML = "";
-        
+            bottomRowContainer.innerHTML = ""; // 하단 좌석 초기화
+
             // 좌석 배치 업데이트
             let totalLeftSeats = 12; // 왼쪽은 항상 12개의 좌석
             let totalRightSeats = busGrade === "일반" ? 12 : 6; // 오른쪽은 일반 12개, 우등 6개
-        
+
             // 왼쪽 두 줄 좌석 생성
             for (let i = 1; i <= totalLeftSeats; i++) {
                 const seat = document.createElement("div");
@@ -568,7 +590,7 @@
                 seat.textContent = i;
                 leftSeatColumn.appendChild(seat);
             }
-        
+
             // 오른쪽 좌석 생성
             rightSeatColumn.style.gridTemplateColumns = busGrade === "일반" ? "repeat(2, 1fr)" : "repeat(1, 1fr)";
             for (let i = 13; i < 13 + totalRightSeats; i++) {
@@ -577,15 +599,26 @@
                 seat.textContent = i;
                 rightSeatColumn.appendChild(seat);
             }
-        
+
+            // 하단 추가 좌석 생성 (일반일 때 5개, 우등일 때 4개)
+            let totalBottomSeats = busGrade === "일반" ? 5 : 4; // 일반은 5개, 우등은 4개
+            let startSeatNumber = totalLeftSeats + totalRightSeats + 1; // 하단 좌석 시작 번호
+
+            for (let i = 0; i < totalBottomSeats; i++) {
+                const seat = document.createElement("div");
+                seat.className = "seat";
+                seat.textContent = startSeatNumber + i;
+                bottomRowContainer.appendChild(seat);
+            }
+
             popup.style.display = 'flex';
-        
+
             // 좌석 선택 이벤트 핸들러 설정
             const seats = document.querySelectorAll(".seat");
             const selectedSeatInfo = document.getElementById("selected-seat-info");
             let selectedSeats = [];
             const peopleCount = parseInt(document.getElementById("people-count").textContent);
-        
+
             seats.forEach(seat => {
                 seat.addEventListener("click", () => {
                     if (seat.classList.contains("selected")) {
@@ -595,7 +628,7 @@
                         seat.classList.add("selected");
                         selectedSeats.push(seat.textContent);
                     }
-        
+
                     selectedSeatInfo.textContent = "선택된 좌석: " + selectedSeats.map(seat => seat + "번 좌석").join(", ");
                 });
             });
