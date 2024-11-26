@@ -118,40 +118,6 @@
             margin-right: auto;
         }
 
-        /* 오른쪽 컨텐츠 섹션 */
-        #content {
-            width: 50%;
-            padding: 20px;
-        }
-        #content h1 {
-            font-size: 22px;
-            color: #3366FF;
-            margin-bottom: 20px;
-        }
-        /* 오른쪽 컨텐츠 섹션 */
-        #content {
-            width: 50%;
-            padding: 20px;
-            color: #ffffff;
-        }
-        #content h1 {
-            font-size: 22px;
-            color: #007bff;
-            margin-bottom: 20px;
-        }
-        /* 공통 박스 스타일 */
-        .box {
-            width: 1000px;
-            height: 800px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #4A90E2;
-            font-size: 24px;
-            font-weight: bold;
-        }
         /* 홈 화면 버튼 스타일 */
         #home-button {
             margin-top: auto;
@@ -169,7 +135,115 @@
             text-decoration: none;
             font-size: 20px;
             font-weight: bold;
+        }   
+
+        /* 오른쪽 컨텐츠 서식 */
+        #content {
+            width: 50%;
+            padding: 20px;
+            color: #ffffff;
         }
+        #content h1 {
+            font-size: 20px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .white-box {
+            width: 1000px;
+            padding: 20px;
+            height: 800px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .box{
+            border: 6px solid #007BFF;
+            width: 900px;
+            height: 750px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+            text-align: center;
+            color: #333
+          
+        }
+
+        .details-box {
+            border: 3px solid #CCCCCC;
+            width: 830px;
+            height: 550px;
+            background-color: #ffffff;
+            border-radius: 5px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            line-height: 1.6;
+            color: #333;
+            left: -0px;
+            position: relative;
+            bottom: 20px;
+        }
+        
+        .search-form {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .search-form select,
+        .search-form button {
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-form button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .arrow-icon {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .info-text {
+            margin-top: 20px;
+        }
+
+        .schedule-table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #CCCCCC;
+            padding: 10px;
+        }
+        .schedule-table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+
     </style>
 </head>
 <body>
@@ -199,11 +273,70 @@
         </div>
         
 
-        <!-- 오른쪽 컨텐츠 섹션 -->
-        <div id="content">
-            <h1>일정을 선택해주세요</h1>
-            <div class="box">
-                여기에 달력 또는 예약 정보를 표시합니다.
+         <div id="content">
+            <h1>운행 정보를 확인하세요.</h1>
+            <div class="white-box">
+                <div class="box">
+                    <!-- 운행 정보 검색 섹션 -->
+                    <form class="search-form" action="{{ url_for('info') }}" method="get">
+                        <select name="출발지역" required>
+                            <option value="" disabled selected>출발지 선택</option>
+                            <option value="광진구">광진구</option>
+                            <option value="종로구">종로구</option>
+                            <option value="서초구">서초구</option>
+                        </select>
+                        <select name="출발터미널" required>
+                            <option value="" disabled selected>터미널 선택</option>
+                            <option value="동서울종합터미널">동서울종합터미널</option>
+                            <option value="서울고속터미널">서울고속터미널</option>
+                        </select>
+                        <span class="arrow-icon">→</span>
+                        <select name="도착지역" required>
+                            <option value="" disabled selected>도착지 선택</option>
+                            <option value="동해시">동해시</option>
+                            <option value="강릉시">강릉시</option>
+                            <option value="속초시">속초시</option>
+                        </select>
+                        <select name="도착터미널" required>
+                            <option value="" disabled selected>터미널 선택</option>
+                            <option value="동해시종합버스터미널">동해시종합버스터미널</option>
+                            <option value="강릉시터미널">강릉시터미널</option>
+                        </select>
+                        <button type="submit">조회</button>
+                    </form>
+                    <p class="info-text">출발 터미널과 도착 터미널을 지정하시면 구간의 시간표 및 요금을 확인하실 수 있습니다.</p>
+
+                    <div class="details-box">
+                        <h2>운행정보</h2>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>출발</th>
+                                    <th>도착</th>
+                                    <th>등급</th>
+                                    <th>요금(어른)</th>
+                                    <th>소요시간</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10:50</td>
+                                    <td>14:07</td>
+                                    <td>일반</td>
+                                    <td>9,600 원</td>
+                                    <td>03:17</td>
+                                </tr>
+                                <tr>
+                                    <td>16:10</td>
+                                    <td>19:27</td>
+                                    <td>일반</td>
+                                    <td>9,600 원</td>
+                                    <td>03:17</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
