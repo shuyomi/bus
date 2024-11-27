@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>운행정보 페이지</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F9F9F9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        /* 전체 레이아웃 */
+        #container {
+            display: flex;
+            width: 80%;
+            max-width: 1600px;
+            height: 900px;
+            background-color:#d3d3d3;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        /* 왼쪽 메뉴 섹션 */
+        #menu {
+            width: 15%;
+            background-color: #3366FF;
+            padding: 20px;
+            color: white;
+            box-shadow: 3px 0 5px rgba(0, 0, 0, 0.3);
+        }
+        #menu h2 {
+            margin-top: 20px;
+            font-size: 40px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #B3E5FC;
+        }
+        #menu a {
+            display: block;
+            font-size: 24px;
+            margin: 90px 0px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        #menu a.active {
+            position: relative;
+            font-weight: bold;
+            color: #3366FF;
+            background-color: white;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬을 맞추기 위해 조정 */
+            text-align: center;
+        }
+        #menu a.disabled {
+            color: #d1d1d1;
+            pointer-events: none;
+        }
+       
+        #status-bar {
+            width: 15%;
+            padding: 20px;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: #4A90E2;
+            font-size: 24px; /* 글자 크기를 크게 설정 */
+            box-shadow: 3px 0 7px rgba(0, 0, 0, 0.2);
+           margin-left: 10px; 
+        }
+        #status-bar .status-step {
+            margin: 62px 0; /* 글자 간의 간격 조정 */
+            font-size: 24px;
+            font-weight: bold;
+            color: #4A90E2;
+            text-align: center;
+        }
+        #status-bar .status-step.active {
+            position: relative;
+            font-size: 30px;
+             background-color: #d3d3d3;
+            font-weight: bold;
+            color: #3366FF;
+            padding: 20px 30px; /* 사각형을 더 넓게 조정 */
+            border-radius: 0px;
+            z-index: 1;
+            width: 230px;
+            margin-left: -20px; /* 메뉴 간의 정렬을 맞추기 위해 조정 */
+            text-align: center;
+            opacity: 0.7; /* 투명도를 80%로 설정 */
+        }
+
+        
+        #status-bar .status-step.disabled {
+            color: #b0b0b0;
+           
+        }   
+        #status-bar .status-icon {
+            width: 50px;  /* 원하는 크기로 설정 */
+            height: 120px;
+             margin: 5px 0; /* 상하 간격 설정 */
+            display: block; /* 세로 정렬을 위한 설정 */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 홈 화면 버튼 스타일 */
+        #home-button {
+            margin-top: auto;
+            
+            text-align: center;
+        }
+    
+        #home-button img {
+            width: 80px;
+            height 80px;
+            margin-bottom: 5px;
+        }
+        #home-button a {
+            color: white;
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        /* 오른쪽 컨텐츠 섹션 */
+        #content {
+            width: 50%;
+            padding: 20px;
+            color: #ffffff;
+        }
+        #content h1 {
+            font-size: 30px;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .white-box {
+            width: 1000px;
+            padding: 0px;
+            height: 800px;
+            background-color: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+            font-size: 18px;
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-y: auto;
+        }
+
+        #header-title {
+            text-align: left;
+            margin-top: 30px;
+            font-size: 30px;
+            font-weight: bold;
+          
+        }
+        .faq-note {
+            color: #888888;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    
+
+        .faq-item {
+            width: 90%;
+            margin-top: 30px;
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+        .faq-item .question {
+            font-weight: bold;
+            cursor: pointer;
+            color: #007bff;
+            
+        }
+        .faq-item .answer {
+            display: none;
+            margin-top: 10px;
+            color: #555;
+        }
+        .faq-item.open .answer {
+            display: block;
+        }
+        .faq-item.open .question {
+            color: #0056b3;
+        }
+       
+    
+      
+    </style>
+</head>
+<body>
+    <div id="container">
+        <!-- 왼쪽 메뉴 섹션 -->
+        <div id="menu">
+            <h2>Menu</h2>
+            <a href="{{ url_for('support') }}" class="active" >고객센터</a>
+            <a href="{{ url_for('placereservation') }}" >예약하기</a>
+            <a href="{{ url_for('check_cancel') }}">예약 확인/취소</a>
+            <a href="{{ url_for('operation_info') }}" >운행정보</a>
+
+         <!-- 홈 버튼 섹션 -->
+         <div id="home-button">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/home.png') }}" alt="Home Icon">
+                <div>홈화면으로 돌아가기</div>
+            </a>
+        </div>
+    </div>
+
+        <!-- 세로 상태 표시줄 -->
+        <div id="status-bar">
+            <a class="status-step active">FAQ</a>
+            <a href="{{ url_for('support') }}" class="status-step disabled">공지사항</a>
+            <div class="status-step disabled">&nbsp;</div>
+            <div class="status-step disabled">&nbsp;</div>
+        </div>
+        
+
+        <div id="content">
+            <h1>FAQ</h1>
+            <div class="white-box">
+                <h2 id="header-title">자주 묻는 질문</h2>
+                <p class="faq-note">질문 클릭 시 답변이 나옵니다.</p>
+                <div class="faq-item">
+                    <div class="question">승차권 예약은 언제까지 가능한가요?</div>
+                    <div class="answer">시외버스 승차권의 예약기간은 특별히 정해져 있는 것은 아니며, 해당 노선의 배차정보가 입력된 일자까지 가능합니다. 배차정보의 입력은 출발지 터미널에서 처리하고 있으며, 일반적으로 출발일을 기준으로 1개월 이후의 배차정보가 입력되어 운영되고 있습니다. "조회 가능한 내역이 없습니다."고 나오면 출발지 터미널로 문의하시기 바랍니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="question">승차권 예약시 지정한 좌석과 실제 이용시 좌석이 다른 경우는 왜 그런가요?</div>
+                    <div class="answer">좌석이 달라질 수 있는 이유에 대한 설명이 여기에 들어갑니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="question">승차권을 예약한 경우 발권은 어떻게 하나요?</div>
+                    <div class="answer">승차권 발권 방법에 대한 설명이 여기에 들어갑니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="question">계좌이체로 예약이 가능한가요?</div>
+                    <div class="answer">계좌이체를 통한 예약은 현재 지원되지 않습니다. 다른 결제 수단을 이용해 주세요.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="question">ARS 또는 상담원과의 전화로 예약이 가능한가요?</div>
+                    <div class="answer">ARS 및 상담원을 통한 예약 서비스는 제공되지 않습니다. 온라인 예약 시스템을 이용해 주세요.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="question">승차권 예약하고 변경, 취소했는데 카드사에서는 취소가 확인되지 않습니다.</div>
+                    <div class="answer">승차권 변경 또는 취소 후 카드사 정보 갱신에 시간이 소요될 수 있습니다. 2-3 영업일 이후에 다시 확인해 주세요.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="question">승차권 요금 중에 아동은 몇 살까지 적용되나요?</div>
+                    <div class="answer">아동 요금은 만 12세 이하 어린이에 적용됩니다. 만 13세 이상부터는 성인 요금이 부과됩니다.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="question">홈페이지에서 예매한 승차권을 종이승차권으로 발권 후 어떻게 취소하나요?</div>
+                    <div class="answer">종이 승차권으로 발권된 경우, 해당 터미널의 창구에서 취소 처리가 가능합니다.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // FAQ 질문 클릭 시 답변 표시/숨기기
+        document.querySelectorAll('.faq-item .question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                faqItem.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>
